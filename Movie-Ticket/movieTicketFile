@@ -1,5 +1,7 @@
 print("Hi there! You are welcome to RunTown Cinema. Have fun watching!")
+
 userName = input("Enter your username: ")
+
 email = input("Enter your Email: ")
 
 movieList = { "movieOne" : "Shrek", "movieTwo" : "WonderWoman", "movieThree" : "Wakanda", "movieFour" : "Shawshank Redemption" }
@@ -10,9 +12,10 @@ preferredMovie = input("Select your preferred movie. (For example: Shrek.): ")
 if preferredMovie in movieList.values():
  numberOfTickets = int(input("Enter the number of tickets you want? "))
 
-userInputForSnack = input("Would you like some snacks? ")
-if userInputForSnack.lower() == "yes":
-    snacksList = {
+userInputForSnack = input("Would you like to buy snacks? (yes/no): ").lower() 
+if userInputForSnack == "yes":
+ print("Great! Let's choose your snacks.")
+ snacksList = {
         "firstPackage":
             {
                 "snack":"Doughnuts with Cola",
@@ -34,32 +37,51 @@ if userInputForSnack.lower() == "yes":
              "price":2
             }
        }
-    for key,value in snacksList.items():
+ for key,value in snacksList.items():
         print("{}:{}".format(key,value))
 
     
-    packageSelected = input("Please select your preffered snacks package. (For example: firstPackage): ")
-    if packageSelected == "firstPackage":
+    
+ packageSelected = input("Please select your preffered snacks package. (For example: firstPackage): ")
+ if packageSelected == "firstPackage":
        totalCustomerItems = int(input("Select the number of items: "))
        customerBill = (numberOfTickets * 10) + (totalCustomerItems * 5)
-       print("Your total bill is : ",customerBill, "€")
+       print("Your total bill is ",customerBill,"€")
        
-    elif packageSelected == "secondPackage":
+ elif packageSelected == "secondPackage":
         totalCustomerItems = int(input("select the number of items: "))
         customerBill = (numberOfTickets * 10) + (totalCustomerItems * 3)
-        print("Your total bill is : ",customerBill, "€")
+        print("Your total bill is ",customerBill,"€")
         
-    elif packageSelected == "thirdPackage":
+ elif packageSelected == "thirdPackage":
         totalCustomerItems = int(input("select the number of items: "))
         customerBill = (numberOfTickets * 10) + (totalCustomerItems * 6)
-        print("Your total bill is : ",customerBill, "€")
+        print("Your total bill is ",customerBill,"€")
         
-    elif packageSelected == "fourthPackage":
+ elif packageSelected == "fourthPackage":
         totalCustomerItems = int(input("select the number of items: "))
         customerBill = (numberOfTickets * 10) + (totalCustomerItems * 2)
-        print("Your total bill is : ",customerBill, "€")  
-    else:
-     ticketCost = numberOfTickets * 10
-     print("The Total bill is",ticketCost)
+        print("Your total bill is ",customerBill,"€")  
+ #else:
+      #print("Please make a choice from the snacks list!")
+
+ newCustomers_data = {
+     email : {
+         preferredMovie : numberOfTickets,
+         packageSelected : totalCustomerItems,
+         'Total_Amount' : customerBill
+     }  
+    }
+ #with open('C:/Users/49157/.vscode/newCustomers_data.txt', 'r') as file:
+ #newCustomers_data = file.read()
+ with open('C:/Users/49157/.vscode/newCustomers_data.txt', 'a') as file:
+     file.write('\n {}'.format(newCustomers_data))
+     print('Your data has been saved successfully.') 
+
+elif userInputForSnack == "no":
+    print("No problem! You can proceed directly to the movie.")
+    ticketCost = numberOfTickets * 10
+    print("Your total bill is ",ticketCost,"€")
 else:
- print("Type the number of tickets correctly!")
+    print("Invalid input. Please answer 'yes' or 'no'.") 
+    
